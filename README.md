@@ -2,7 +2,7 @@
 
 Tutrial:
 1. Inisialisasi project, dengan perintah > npm init -y
-2. Install package express dan validator, mysql, body-parser, jsonwebtoken, bcryptjs, dan cors dengan perintah > npm install express express-validator mysql body-parser jsonwebtoken bcryptjs cors --save
+2. Install package express dan validator, mysql, body-parser, jsonwebtoken, bcryptjs, sprintf-js, dan cors dengan perintah > npm install express express-validator mysql body-parser sprintf-js jsonwebtoken bcryptjs cors --save
 3. Import database dari folder > database
 4. Masuk ke dalam root aplikasi, lalu jalankan perintah > node server.js
 
