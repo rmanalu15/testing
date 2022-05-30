@@ -11,7 +11,7 @@
  Target Server Version : 100422
  File Encoding         : 65001
 
- Date: 30/05/2022 16:49:34
+ Date: 30/05/2022 19:01:19
 */
 
 SET NAMES utf8mb4;
@@ -30,7 +30,18 @@ CREATE TABLE `pricelist`  (
   `updated_at` timestamp(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   `created_at` timestamp(0) NOT NULL DEFAULT current_timestamp(0),
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of pricelist
+-- ----------------------------
+INSERT INTO `pricelist` VALUES (3, 'PL00001', 100000000, 1, 1, NULL, '2022-05-30 18:54:22');
+INSERT INTO `pricelist` VALUES (4, 'PL00002', 200000000, 1, 2, NULL, '2022-05-30 18:55:15');
+INSERT INTO `pricelist` VALUES (5, 'PL00003', 300000000, 1, 3, NULL, '2022-05-30 18:55:24');
+INSERT INTO `pricelist` VALUES (6, 'PL00004', 400000000, 1, 4, NULL, '2022-05-30 18:55:34');
+INSERT INTO `pricelist` VALUES (7, 'PL00005', 500000000, 1, 10, NULL, '2022-05-30 19:00:27');
+INSERT INTO `pricelist` VALUES (8, 'PL00006', 600000000, 1, 11, NULL, '2022-05-30 19:00:38');
+INSERT INTO `pricelist` VALUES (9, 'PL00007', 700000000, 1, 12, NULL, '2022-05-30 19:00:45');
 
 -- ----------------------------
 -- Table structure for users
@@ -50,7 +61,7 @@ CREATE TABLE `users`  (
 -- ----------------------------
 -- Records of users
 -- ----------------------------
-INSERT INTO `users` VALUES (57, 'Rupinda Manalu', 'true', 'pinda@gmail.com', '$2a$10$73qQ8xlEHoJeIMCgYbmqJu4dvE9whTQ55DlsjM5A.GZL/r9aKF3rG', '2022-05-30 16:22:23', '2022-05-29 10:26:26');
+INSERT INTO `users` VALUES (57, 'Rupinda Manalu', 'true', 'pinda@gmail.com', '$2a$10$73qQ8xlEHoJeIMCgYbmqJu4dvE9whTQ55DlsjM5A.GZL/r9aKF3rG', '2022-05-30 18:46:31', '2022-05-29 10:26:26');
 INSERT INTO `users` VALUES (58, 'PT SERU', 'false', 'ptseru@gmail.com', '$2a$10$EsbYXRTUB.MJ6sEBYWJ7nejmT6.OskbJ3hUzp5B4OjaPlQs0wqcqu', '2022-05-30 14:17:59', '2022-05-29 10:27:57');
 
 -- ----------------------------
