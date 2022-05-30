@@ -11,7 +11,7 @@
  Target Server Version : 100422
  File Encoding         : 65001
 
- Date: 30/05/2022 19:01:19
+ Date: 30/05/2022 19:17:49
 */
 
 SET NAMES utf8mb4;
@@ -35,13 +35,12 @@ CREATE TABLE `pricelist`  (
 -- ----------------------------
 -- Records of pricelist
 -- ----------------------------
-INSERT INTO `pricelist` VALUES (3, 'PL00001', 100000000, 1, 1, NULL, '2022-05-30 18:54:22');
+INSERT INTO `pricelist` VALUES (3, 'PL00001', 800000000, 1, 1, '2022-05-30 19:10:46', '2022-05-30 18:54:22');
 INSERT INTO `pricelist` VALUES (4, 'PL00002', 200000000, 1, 2, NULL, '2022-05-30 18:55:15');
 INSERT INTO `pricelist` VALUES (5, 'PL00003', 300000000, 1, 3, NULL, '2022-05-30 18:55:24');
 INSERT INTO `pricelist` VALUES (6, 'PL00004', 400000000, 1, 4, NULL, '2022-05-30 18:55:34');
 INSERT INTO `pricelist` VALUES (7, 'PL00005', 500000000, 1, 10, NULL, '2022-05-30 19:00:27');
 INSERT INTO `pricelist` VALUES (8, 'PL00006', 600000000, 1, 11, NULL, '2022-05-30 19:00:38');
-INSERT INTO `pricelist` VALUES (9, 'PL00007', 700000000, 1, 12, NULL, '2022-05-30 19:00:45');
 
 -- ----------------------------
 -- Table structure for users

@@ -3,11 +3,80 @@ const router = express.Router();
 const conn = require('./config/connection');
 const { signupValidation, loginValidation, brandvalidation, getDataBrandvalidation, updateBrandvalidation, deleteBrandvalidation, 
     tambahTypevalidation, getTypevalidation, getBrandIdvalidation, updateTypevalidation, deleteTypevalidation, tambahModelvalidation, 
-    updateModelvalidation, viewModelTypevalidation, tambahTahunvalidation, tambahPLvalidation } = require('./validation.js');
+    updateModelvalidation, viewModelTypevalidation, tambahTahunvalidation, tambahPLvalidation, updatePLvalidation, deletePLvalidation } = require('./validation.js');
 const { validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const sprintf = require('sprintf-js').sprintf;
+
+
+// Router delete price list by code.
+router.delete('/delete-price-list', deletePLvalidation, (req, res, next) => {
+    // Cek token.
+    if (!req.headers.authorization || !req.headers.authorization.startsWith('Bearer') || !req.headers.authorization.split(' ')[1]) {
+        return res.status(201).send({
+            metaData: {code: 201, message: 'Token invalid/kosong!'}
+        });
+    }
+    const theToken = req.headers.authorization.split(' ')[1];
+    const decoded = jwt.verify(theToken, 'rupinda@manalu');
+    conn.query('select * from users where id=?', decoded.id, function (error, results, fields) {
+        if (error) throw error;
+        if (results[0].is_admin == "true") {
+            // Validasi hapus price list.
+            const errors = validationResult(req);
+            if (!errors.isEmpty()) {
+                return res.status(201).send({
+                    metaData: {code: 201, message: errors.array()}
+                });
+            } else {
+                // Hapus data price list.
+                conn.query(`delete from pricelist where code='${req.body.code}'`);
+                return res.status(200).send({
+                    metaData: {code: 200, message: 'Price list berhasil dihapus!'}
+                });
+            }
+        } else if (results[0].is_admin == "false") {
+            return res.status(201).send({
+                metaData: {code: 201, message: 'Akses ditolak'}
+            });
+        }
+    });
+});
+
+// Router update price list.
+router.patch('/update-price-list', updatePLvalidation, (req, res, next) => {
+    // Cek token.   
+    if (!req.headers.authorization || !req.headers.authorization.startsWith('Bearer') || !req.headers.authorization.split(' ')[1]) {
+        return res.status(201).send({
+            metaData: {code: 201, message: 'Token invalid/kosong!'}
+        });
+    }
+    const theToken = req.headers.authorization.split(' ')[1];
+    const decoded = jwt.verify(theToken, 'rupinda@manalu');
+    conn.query('select * from users where id=?', decoded.id, function (error, results, fields) {
+        if (error) throw error;
+        if (results[0].is_admin == "true") {
+            // Validasi update price list.
+            const errors = validationResult(req);
+            if (!errors.isEmpty()) {
+                return res.status(201).send({
+                    metaData: {code: 201, message: errors.array()}
+                });
+            } else {
+                // Update data price list.
+                conn.query(`update pricelist set price='${req.body.price}' where code='${req.body.code}'`);
+                return res.status(200).send({
+                    metaData: {code: 200, message: 'Price list berhasil diupdate!'}
+                });
+            }
+        } else if (results[0].is_admin == "false") {
+            return res.status(201).send({
+                metaData: {code: 201, message: 'Akses ditolak'}
+            });
+        }
+    });
+});
 
 // Router tambah data price list.
 router.post('/tambah-price-list', tambahPLvalidation, (req, res, next) => {
@@ -30,7 +99,7 @@ router.post('/tambah-price-list', tambahPLvalidation, (req, res, next) => {
                 });
             } else {
                 // Generate kode.
-                conn.query(`select ifnull(max(right(code,3)),0) + 1 as codeMax from pricelist where date(created_at)=curdate()`,
+                conn.query(`select ifnull(max(right(code,5)),0) + 1 as codeMax from pricelist where date(created_at)=curdate()`,
                     (err, result) => {
                         if (err) throw err;
                         genCode = sprintf("PL%05s", result[0].codeMax);

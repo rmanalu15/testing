@@ -1,6 +1,17 @@
 const { body, check } = require('express-validator');
 
 // Validasi tambah data tahun.
+exports.deletePLvalidation = [
+    body('code', 'code tidak boleh kosong/tidak valid').not().isEmpty()
+];
+
+// Validasi tambah data tahun.
+exports.updatePLvalidation = [
+    body('code', 'code tidak boleh kosong/tidak valid').not().isEmpty(),
+    body('price', 'price tidak boleh kosong').not().isEmpty()
+];
+
+// Validasi tambah data tahun.
 exports.tambahPLvalidation = [
     body('price', 'price tidak boleh kosong/tidak valid').not().isEmpty(),
     body('year_id', 'year_id tidak boleh kosong').not().isEmpty(),
