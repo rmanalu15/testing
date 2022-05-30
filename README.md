@@ -135,3 +135,8 @@ Postman Collection:
   Structured: Form URL Encoded <br>
   Authentication: Bearer Token (Token dari hasil login user) <br>
   Parameter: code <br>
+  - Filter Price List By Tahun: <br>
+  Type: GET <br>
+  Structured: Form URL Encoded <br>
+  Authentication: Bearer Token (Token dari hasil login user) <br>
+  Parameter: year <br>
