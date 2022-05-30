@@ -3,12 +3,55 @@ const router = express.Router();
 const conn = require('./config/connection');
 const { signupValidation, loginValidation, brandvalidation, getDataBrandvalidation, updateBrandvalidation, deleteBrandvalidation, 
     tambahTypevalidation, getTypevalidation, getBrandIdvalidation, updateTypevalidation, deleteTypevalidation, tambahModelvalidation, 
-    updateModelvalidation, viewModelTypevalidation, tambahTahunvalidation, tambahPLvalidation, updatePLvalidation, deletePLvalidation } = require('./validation.js');
+    updateModelvalidation, viewModelTypevalidation, tambahTahunvalidation, tambahPLvalidation, updatePLvalidation, deletePLvalidation, 
+    filterTahunPLvalidation } = require('./validation.js');
 const { validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const sprintf = require('sprintf-js').sprintf;
 
+
+// Router filter price list by year.
+router.get('/filter-price-list-tahun', filterTahunPLvalidation, (req, res, next) => {
+    // Cek token.
+    if (!req.headers.authorization || !req.headers.authorization.startsWith('Bearer') || !req.headers.authorization.split(' ')[1]) {
+        return res.status(201).send({
+            metaData: {code: 201, message: 'Token invalid/kosong!'}
+        });
+    }
+    const theToken = req.headers.authorization.split(' ')[1];
+    const decoded = jwt.verify(theToken, 'rupinda@manalu');
+    conn.query('select * from users where id=?', decoded.id, function (error, results, fields) {
+        if (error) throw error;
+        // Validasi filter price list by year.
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(201).send({
+                metaData: {code: 201, message: errors.array()}
+            });
+        } else {
+            // View filter price list by year.
+            conn.query(`select a.code, a.price, b.year, c.name, a.updated_at, a.created_at from pricelist as a left join vehicle_year as b on b.id=a.year_id 
+            left join vehicle_model as c on c.id=a.model_id where b.year='${req.body.year}'`,
+            (err, result) => {
+                if (err) throw err;
+                if (result.length) {
+                    return res.status(200).send({
+                        metaData: {code: 200, message: 'Sukses'},
+                        response: result,
+                        user: results[0].name
+                    });
+                } else {
+                    return res.status(201).send({
+                        metaData: {code: 201, message: 'Data tidak ditemukan!'},
+                        user: results[0].name
+                    });
+                }
+            }
+            );
+        }
+    });
+});
 
 // Router delete price list by code.
 router.delete('/delete-price-list', deletePLvalidation, (req, res, next) => {

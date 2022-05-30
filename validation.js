@@ -1,5 +1,10 @@
 const { body, check } = require('express-validator');
 
+// Validasi price list filter by year_id.
+exports.filterTahunPLvalidation = [
+    body('year', 'year tidak boleh kosong/tidak valid').not().isEmpty()
+];
+
 // Validasi tambah data tahun.
 exports.deletePLvalidation = [
     body('code', 'code tidak boleh kosong/tidak valid').not().isEmpty()
