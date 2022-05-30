@@ -123,3 +123,15 @@ Postman Collection:
   Authentication: Bearer Token (Token dari hasil login user) <br>
   Notes: Field created_at dan updated_at sudah auto insert dan auto updated. <br>
   Parameter: price, year_id, model_id <br>
+  - Update Data Price List: <br>
+  URL: http://localhost:8000/seru/update-price-list <br>
+  Type: PATCH <br>
+  Structured: Form URL Encoded <br>
+  Authentication: Bearer Token (Token dari hasil login user) <br>
+  Parameter: code, price <br>
+  - Delete Data Price By Code: <br>
+  URL: http://localhost:8000/seru/delete-price-list <br>
+  Type: DELETE <br>
+  Structured: Form URL Encoded <br>
+  Authentication: Bearer Token (Token dari hasil login user) <br>
+  Parameter: code <br>
