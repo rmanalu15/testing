@@ -2,7 +2,7 @@ const { body, check } = require('express-validator');
 
 // Validasi tambah data tahun.
 exports.tambahPLvalidation = [
-    body('price', 'price tidak boleh kosong/tidak valid').not().isEmpty().isString(),
+    body('price', 'price tidak boleh kosong/tidak valid').not().isEmpty(),
     body('year_id', 'year_id tidak boleh kosong').not().isEmpty(),
     body('model_id', 'model_id tidak boleh kosong').not().isEmpty()
 ];

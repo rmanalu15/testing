@@ -33,7 +33,7 @@ router.post('/tambah-price-list', tambahPLvalidation, (req, res, next) => {
                 conn.query(`select ifnull(max(right(code,3)),0) + 1 as codeMax from pricelist where date(created_at)=curdate()`,
                     (err, result) => {
                         if (err) throw err;
-                        genCode = sprintf("%05s", result[0].codeMax);
+                        genCode = sprintf("PL%05s", result[0].codeMax);
                         // Simpan data price list.
                         conn.query(`insert into pricelist (code,price,year_id,model_id) values ('${genCode}','${req.body.price}','${req.body.year_id}','${req.body.model_id}')`);
                         return res.status(200).send({
