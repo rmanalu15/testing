@@ -31,8 +31,9 @@ router.get('/filter-price-list-tahun', filterTahunPLvalidation, (req, res, next)
             });
         } else {
             // View filter price list by year.
-            conn.query(`select a.code, a.price, b.year, c.name, a.updated_at, a.created_at from pricelist as a left join vehicle_year as b on b.id=a.year_id 
-            left join vehicle_model as c on c.id=a.model_id where b.year='${req.body.year}'`,
+            conn.query(`select a.code, a.price, b.year, e.name as brand, d.name as type, c.name as model, a.updated_at, a.created_at from pricelist as a 
+            left join vehicle_year as b on b.id=a.year_id left join vehicle_model as c on c.id=a.model_id left join vehicle_type as d on d.id=c.type_id 
+            left join vehicle_brand as e on e.id=d.brand_id where b.year='${req.body.year}'`,
             (err, result) => {
                 if (err) throw err;
                 if (result.length) {
