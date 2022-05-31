@@ -136,6 +136,7 @@ Postman Collection:
   Authentication: Bearer Token (Token dari hasil login user) <br>
   Parameter: code <br>
   - Filter Price List By Tahun: <br>
+  URL: hhtp://localhost:8000:seru/filter-price-list-tahun <br>
   Type: GET <br>
   Structured: Form URL Encoded <br>
   Authentication: Bearer Token (Token dari hasil login user) <br>
